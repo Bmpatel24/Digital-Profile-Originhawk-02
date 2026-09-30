@@ -52,15 +52,93 @@ body:before{
 }
 .brandname{font-size:14px;letter-spacing:4px;font-weight:650}
 .menu{font-size:21px;color:var(--muted);background:none;border:0}
-.hero{text-align:center;padding:15px 0 20px}
+.hero{
+  text-align:center;
+  padding:15px 0 20px;
+  position:relative;
+  isolation:isolate;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  top:-18px;
+  left:-16px;
+  right:-16px;
+  height:190px;
+  pointer-events:none;
+  opacity:.72;
+  background-image:
+    linear-gradient(to right, rgba(244,243,238,.075) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244,243,238,.075) 1px, transparent 1px),
+    linear-gradient(to right, rgba(199,255,61,.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(199,255,61,.045) 1px, transparent 1px);
+  background-size:42px 42px,42px 42px,126px 126px,126px 126px;
+  background-position:0 0,0 0,0 0,0 0;
+  -webkit-mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.8) 48%, transparent 100%);
+  mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.8) 48%, transparent 100%);
+  animation:gridDrift 16s linear infinite;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:-20%;
+  width:38%;
+  height:1px;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(199,255,61,.55),transparent);
+  box-shadow:0 0 12px rgba(199,255,61,.16);
+  opacity:.5;
+  animation:gridScan 7s ease-in-out infinite;
+}
+
+@keyframes gridDrift{
+  from{background-position:0 0,0 0,0 0,0 0}
+  to{background-position:42px 42px,-42px -42px,126px 0,-126px 0}
+}
+
+@keyframes gridScan{
+  0%,100%{transform:translateX(0);opacity:0}
+  12%{opacity:.15}
+  50%{transform:translateX(330%);opacity:.55}
+  88%{opacity:.08}
+}
 .avatar{
   width:126px;height:126px;border:1px solid rgba(199,255,61,.8);
-  border-radius:50%;margin:5px auto 23px;display:grid;place-items:center;
-  background:radial-gradient(circle,rgba(199,255,61,.08),rgba(5,9,7,.9) 67%);
+  border-radius:50%;margin:5px auto 36px;display:grid;place-items:center;
+  background:radial-gradient(circle,#10251C 0%,#10251C 62%,rgba(16,37,28,.92) 100%);
   box-shadow:0 0 35px rgba(199,255,61,.16),inset 0 0 25px rgba(199,255,61,.06);
   position:relative;animation:float 5s ease-in-out infinite;
 }
-.avatar .logo{transform:scale(1.6) rotate(-3deg)}
+.avatar .brand-logo{width:58px;height:58px;object-fit:contain;display:block;filter:drop-shadow(0 0 12px rgba(199,255,61,.16));animation:logoBreathe 4.8s ease-in-out infinite}
+
+.avatar:after{
+  content:"";
+  position:absolute;
+  width:154px;
+  height:154px;
+  border-radius:50%;
+  border:1px solid rgba(199,255,61,.10);
+  border-top-color:rgba(199,255,61,.62);
+  border-right-color:rgba(199,255,61,.22);
+  animation:currentFlow 7s linear infinite;
+  pointer-events:none;
+}
+.avatar:before{
+  content:"";
+  position:absolute;
+  width:42px;
+  height:1px;
+  left:-18px;
+  top:28%;
+  background:linear-gradient(90deg,transparent,rgba(199,255,61,.55),transparent);
+  animation:signalSweep 5.5s ease-in-out infinite;
+  opacity:.45;
+}
 .hero .eyebrow{color:var(--lime);font-size:9px;letter-spacing:5px;text-transform:uppercase;margin-bottom:10px}
 h1{font-size:31px;letter-spacing:6px;margin:0 0 7px;font-weight:500}
 .tag{font-size:10px;letter-spacing:4px;color:var(--muted)}
@@ -94,8 +172,8 @@ h1{font-size:31px;letter-spacing:6px;margin:0 0 7px;font-weight:500}
 .service strong{line-height:1.35}
 
 .icon{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:18px;background:#121b18;border:1px solid rgba(255,255,255,.08)}
-.link:nth-child(1) .icon{color:#ff4e9b}.link:nth-child(2) .icon{color:#66a9ff}.link:nth-child(3) .icon{color:#5ca7ff}.link:nth-child(4) .icon{color:#55d47a}.link:nth-child(5) .icon{color:#80a6ff}.link:nth-child(6) .icon{color:#f4f3ee}
-.linktext{flex:1}.linktext strong{display:block;font-size:14px;font-weight:550}.linktext span{display:block;color:#7f8983;font-size:10px;margin-top:3px}
+.link:nth-child(1) .icon{color:#ff4e9b}.link:nth-child(2) .icon{color:var(--lime)}.link:nth-child(3) .icon{color:var(--lime)}.link:nth-child(4) .icon{color:var(--lime)}.link:nth-child(5) .icon{color:var(--lime)}.link:nth-child(6) .icon{color:var(--lime)}
+.social-svg svg{width:21px;height:21px;display:block;color:var(--lime)}.linktext{flex:1}.linktext strong{display:block;font-size:14px;font-weight:550}.linktext span{display:block;color:#7f8983;font-size:10px;margin-top:3px}
 .arrow{width:32px;height:32px;border-radius:50%;background:#151e1b;display:grid;place-items:center;color:var(--lime);font-size:17px}
 .section{margin-top:42px}
 .kicker{font-size:8px;letter-spacing:4px;color:var(--lime);text-transform:uppercase}
@@ -126,8 +204,11 @@ h1{font-size:31px;letter-spacing:6px;margin:0 0 7px;font-weight:500}
   color:var(--lime);
   font-weight:500;
 }
+.flow-line{height:1px;max-width:220px;margin:16px auto 16px;overflow:hidden;opacity:.42;background:linear-gradient(90deg,transparent,rgba(199,255,61,.12),transparent)}
+.flow-line span{display:block;width:44px;height:1px;background:linear-gradient(90deg,transparent,var(--lime),transparent);animation:lineCurrent 4.8s ease-in-out infinite}
+@keyframes lineCurrent{0%,100%{transform:translateX(-50px);opacity:.15}50%{transform:translateX(225px);opacity:.8}}
 .process-line{
-  margin:24px auto 4px;
+  margin:0 auto 4px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -160,7 +241,7 @@ h1{font-size:31px;letter-spacing:6px;margin:0 0 7px;font-weight:500}
   color:var(--lime);
   border-color:rgba(199,255,61,.25);
 }
-.website-link .linktext strong{color:var(--lime)}
+.website-link .linktext strong{color:var(--text)}
 
 @keyframes statementIn{
   from{opacity:0;transform:translateY(8px);letter-spacing:5px}
@@ -176,6 +257,18 @@ h1{font-size:31px;letter-spacing:6px;margin:0 0 7px;font-weight:500}
   50%{opacity:1;transform:translateX(3px)}
 }
 @keyframes float{50%{transform:translateY(-5px)}}
+@keyframes logoBreathe{0%,100%{transform:scale(1.15)}50%{transform:scale(1.19)}}
+@keyframes currentFlow{
+  from{
+    transform:rotate(0deg);
+    filter:drop-shadow(0 0 5px rgba(199,255,61,.22));
+  }
+  to{
+    transform:rotate(360deg);
+    filter:drop-shadow(0 0 5px rgba(199,255,61,.22));
+  }
+}
+@keyframes signalSweep{0%,100%{transform:translateX(0);opacity:.08}45%{transform:translateX(42px);opacity:.55}55%{transform:translateX(42px);opacity:.55}80%{transform:translateX(0);opacity:.08}}45%{transform:translateX(42px);opacity:.55}55%{transform:translateX(42px);opacity:.55}80%{transform:translateX(0);opacity:.08}}
 @media(max-width:360px){
   .container{padding-inline:12px}
   h1{font-size:26px;letter-spacing:4px}
@@ -191,10 +284,10 @@ h1{font-size:31px;letter-spacing:6px;margin:0 0 7px;font-weight:500}
 
 
   <section class="hero">
-    <div class="avatar"><div class="logo" aria-hidden="true"></div></div>
-    <div class="eyebrow">Brand Building & Creative Studio</div>
+    <div class="avatar"><img class="brand-logo" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTc0IiBoZWlnaHQ9IjU1MCIgdmlld0JveD0iMCAwIDU3NCA1NTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xMDUuNzIzIDExNC4wMjNMMzgwLjI4NiAxMTQuOTM2QzM0NC4xNTIgMTUwLjQ2MiAzMDUuMDMyIDE4NC42OTcgMjYyLjkyOCAyMTcuNjQyTDI3MC4xNTUgMTkwLjY0SDE0MC40NjhMODAuOTA1NiAyNDkuMTVMODAuMzY5NiA0MTYuOTU4TDEzOS41NzUgNDc0LjU1NEgyNjkuNjM5TDMyOS41NzkgNDE2Ljc5OVYzODYuNjZMNDEwLjk4MSAzNTIuNDUxVjQ0OC4xNjhMMzA2Ljc4NiA1NTBIMTAyLjA3TDAgNDQ5LjI0VjIxNy43ODFMMTA1LjcyMyAxMTQuMDIzWiIgZmlsbD0iI0YzRjBFQiIvPgo8cGF0aCBkPSJNNDQxLjE5OCAxMTQuMjAxSDUyMS4zODlMNDk5LjI5MiAxNjIuODI0QzQzOC4wMjIgMjA0LjU0NCAzNzcuNDI3IDI0Ni45MDYgMzE3LjUwNyAyODkuOTFMNDc4LjQ4NSAyMTYuNDVDNDY2LjMyMSAyNDkuMzk1IDQ1My4zMjkgMjcxLjI0NyA0MzkuNTExIDI4Mi4wMDhDNDA3LjU4NSAzMDYuNTI4IDM3MS41MTEgMzMwLjM3MyAzMzAuMDc1IDM0Ni43NTNMMTc4LjcwNyA0MDMuNzE0QzE4OC42NzQgMzY4LjcxOCAyMDAuMDcgMzM1LjY2MSAyMTIuODk2IDMwNC41NDNMNDQxLjE5OCAxMTQuMjAxWiIgZmlsbD0iI0I4RTk0RSIvPgo8cGF0aCBkPSJNNTczLjc0NiAwTDUzMy45OTggODQuNDE5OEg0NzUuNTY3TDU3My43NDYgMFoiIGZpbGw9IiNCOEU5NEUiLz4KPC9zdmc+Cg==" alt="OriginHawk logo"></div>
     <h1>ORIGINHAWK</h1>
     <div class="tag brand-statement">A Place Where <b>Brands Are Created.</b></div>
+    <div class="flow-line" aria-hidden="true"><span></span></div>
     <div class="process-line" aria-label="Create, Manage, Elevate">
       <span class="process-word">CREATE</span>
       <i>→</i>
@@ -205,11 +298,11 @@ h1{font-size:31px;letter-spacing:6px;margin:0 0 7px;font-weight:500}
   </section>
 
   <section class="links" aria-label="Connect with OriginHawk">
-    <a class="link website-link" href="#" target="_blank"><div class="icon">↗</div><div class="linktext"><strong>Visit Our Website</strong><span>Explore OriginHawk</span></div><div class="arrow">→</div></a>
-    <a class="link" href="#" target="_blank"><div class="icon">◎</div><div class="linktext"><strong>Instagram</strong><span>Follow Our Journey</span></div><div class="arrow">→</div></a>
-    <a class="link" href="#" target="_blank"><div class="icon">in</div><div class="linktext"><strong>LinkedIn</strong><span>Let's Build Together</span></div><div class="arrow">→</div></a>
-    <a class="link" href="#" target="_blank"><div class="icon">f</div><div class="linktext"><strong>Facebook</strong><span>Join Our Community</span></div><div class="arrow">→</div></a>
-    <a class="link" href="#" target="_blank"><div class="icon">◔</div><div class="linktext"><strong>WhatsApp</strong><span>Chat With Us</span></div><div class="arrow">→</div></a>
+<a class="link website-link" href="#" target="_blank"><div class="icon">↗</div><div class="linktext"><strong>Visit Our Website</strong><span>Explore OriginHawk</span></div><div class="arrow">→</div></a>
+<a class="link" href="https://wa.me/919714597105" target="_blank" rel="noopener noreferrer"><div class="icon social-svg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.1 3.9A11.2 11.2 0 0 0 12 1.1C5.8 1.1.8 6.1.8 12.3c0 2 .5 3.9 1.5 5.6L.7 22.9l5.2-1.6c1.6.9 3.5 1.4 5.4 1.4h.1c6.1 0 11.1-5 11.1-11.1 0-3-1.2-5.7-3.4-7.7Zm-8 16.9h-.1c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.1.9.9-3-.2-.3c-.9-1.5-1.4-3.1-1.4-4.8C3.2 7.2 7.1 3.3 12 3.3c2.4 0 4.6.9 6.3 2.6 1.7 1.7 2.6 3.9 2.6 6.3 0 4.8-3.9 8.6-8.8 8.6Zm4.8-6.5c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.7.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-1-2.2-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.2 3.2c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.3.2-.6.2-1.2.1-1.3-.1-.2-.3-.2-.6-.4Z" fill="currentColor"/></svg></div><div class="linktext"><strong>WhatsApp</strong><span>Chat With Us</span></div><div class="arrow">→</div></a>
+<a class="link" href="https://www.instagram.com/origin.hawk/" target="_blank" rel="noopener noreferrer"><div class="icon social-svg"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.7" cy="6.5" r="1.1" fill="currentColor"/></svg></div><div class="linktext"><strong>Instagram</strong><span>Follow Our Journey</span></div><div class="arrow">→</div></a>
+<a class="link" href="https://www.linkedin.com/in/bhargav-vora-4b5204245/" target="_blank" rel="noopener noreferrer"><div class="icon">in</div><div class="linktext"><strong>LinkedIn</strong><span>Let's Build Together</span></div><div class="arrow">→</div></a>
+<a class="link" href="#" target="_blank"><div class="icon">f</div><div class="linktext"><strong>Facebook</strong><span>Join Our Community</span></div><div class="arrow">→</div></a>
   </section>
 
   <section class="section">
@@ -219,12 +312,12 @@ h1{font-size:31px;letter-spacing:6px;margin:0 0 7px;font-weight:500}
       <div class="service"><div class="sicon">◌</div><strong>Social Media Management & SEO</strong><span>Build visibility. Stay relevant. Grow.</span></div>
       <div class="service"><div class="sicon">↗</div><strong>Google Ads & Performance Marketing</strong><span>Turn attention into measurable growth.</span></div>
       <div class="service"><div class="sicon">⌁</div><strong>Lead Generation & Funnel Engineering</strong><span>Build systems that move leads forward.</span></div>
+      <div class="service"><div class="sicon">▤</div><strong>Website Design & Development</strong><span>Web experiences built for your business.</span></div>
       <div class="service"><div class="sicon">▣</div><strong>IT Support & Infrastructure</strong><span>Keep your business systems running.</span></div>
       <div class="service"><div class="sicon">✦</div><strong>AI Generated Video & Dynamic Ads</strong><span>Create faster. Capture attention.</span></div>
       <div class="service"><div class="sicon">◈</div><strong>Professional Shoots & Cinematic Content</strong><span>Turn your brand into visual stories.</span></div>
       <div class="service"><div class="sicon">⌘</div><strong>Personal AI Automation Tools</strong><span>Automate repetitive work intelligently.</span></div>
       <div class="service"><div class="sicon">◇</div><strong>Business Custom Software Tools</strong><span>Build tools around your workflow.</span></div>
-      <div class="service"><div class="sicon">▤</div><strong>Website Design & Development</strong><span>Web experiences built for your business.</span></div>
     </div>
   </section>
 </main>
